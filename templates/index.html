@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CraftCortex -> Master the Art of Origami</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px auto;
+            padding: 40px;
+            max-width: 800px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+        h1 {
+            color: #4c566a; /* Nord Theme: Polar Night */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #4c566a; /* Nord Theme: Polar Night */
+            margin-top: 25px;
+            border-bottom: 2px solid #d8dee9; /* Nord Theme: Snow Storm */
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        h3 {
+            color: #4c566a; /* Nord Theme: Polar Night */
+            margin-top: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 5px; /* Drastically reduced margin here */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            border: 1px solid #d8dee9;
+            border-radius: 6px;
+            padding: 6px 12px;
+            background-color: #fff;
+            width: 80%;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .file-upload-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+        .file-upload-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: calc(100% - 30px); /* Adjust for padding/icon */
+        }
+        input[type="submit"] {
+            background-color: #8fbcbb; /* Nord Theme: Aurora Green */
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            margin-bottom: 0; /* Remove default margin of the submit button */
+        }
+        input[type="submit"]:hover {
+            background-color: #81a1c1; /* Nord Theme: Aurora Blue */
+        }
+        .result {
+            margin-top: 20px; /* Reduced margin for the result as well */
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+        .tutorial {
+            margin-bottom: 1.2em;
+        }
+        .tutorial a {
+            color: #5e81ac; /* Nord Theme: Aurora Cyan */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .tutorial a:hover {
+            text-decoration: underline;
+            color: #88c0d0; /* Nord Theme: Aurora Blue */
+        }
+        .model-info {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to CraftCortex -> Master the Art of Origami</h1>
+    <p style="text-align: center; color: #555; margin-bottom: 30px;">Upload an image of any origami creation, and find a tutorial to make it yourself!</p>
+
+    <form method="POST" enctype="multipart/form-data" id="uploadForm">
+        <div class="file-upload-wrapper">
+            <input type="file" name="file" id="fileInput">
+            <span class="file-upload-text" id="fileLabel">Choose file</span>
+        </div>
+        <br><br>
+        <input type="submit" value="Classify Origami" style="margin-bottom: 0;">
+    </form>
+
+    {% if prediction %}
+    <div class="result" style="margin-top: 10px;">
+        <h2>CraftCortex Prediction: {{ prediction }}</h2>
+
+        <h3>Learn to Fold: YouTube Tutorials</h3>
+        {% if youtube_links %}
+            {% for link in youtube_links %}
+            <div class="tutorial">
+                <a href="{{ link }}" target="_blank">{{ link }}</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No YouTube tutorials found for {{ prediction }}.</p>
+        {% endif %}
+
+        <h3>Find Inspiration: Pinterest Ideas</h3>
+        {% if pinterest_links %}
+            {% for link in pinterest_links %}
+            <div class="tutorial">
+                <a href="{{ link }}" target="_blank">{{ link }}</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No Pinterest ideas found for {{ prediction }}.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="model-info">
+        <p>Powered by the CraftCortex model.</p>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const fileLabel = document.getElementById('fileLabel');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileLabel.textContent = this.files[0].name;
+            } else {
+                fileLabel.textContent = 'Choose file';
+            }
+        });
+    </script>
+</body>
+</html>
