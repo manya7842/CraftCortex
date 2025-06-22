@@ -1,4 +1,4 @@
-# CraftCortex - CNN-Based Origami Recognition and Tutorial Curation
+# CraftCortex: CNN-Based Origami Recognition and Tutorial Curation
 
 A web application that classifies origami creations from uploaded images using a custom-trained CNN model based on MobileNetV2 architecture. The application provides real-time classification with 76% accuracy and automatically scrapes relevant YouTube tutorials and Pinterest ideas for the predicted origami type.
 
