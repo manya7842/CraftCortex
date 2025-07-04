@@ -95,16 +95,19 @@ The model was trained on the **Origami Models Dataset** available on Kaggle:
     ```
 
 3. **Install dependencies:**
-    ```bash
+
+   The versions are noted in requirements.txt
+   
+   ```bash
     pip install Flask tensorflow keras scikit-learn opencv-python selenium webdriver-manager
     ```
 
-4. **Setup project structure:**
+5. **Setup project structure:**
     ```bash
     mkdir uploads templates static
     ```
 
-5. **Place model files:**
+6. **Place model files:**
     - Ensure `CraftCortex.h5` (trained model) is in the root directory
     - Ensure `label_encoder.pkl` (label encoder) is in the root directory
     - Place `index.html` in the `templates/` directory
